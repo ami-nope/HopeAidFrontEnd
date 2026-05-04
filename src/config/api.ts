@@ -11,7 +11,7 @@ function getDefaultApiBaseUrl() {
     return `${apiProtocol}//localhost:8000`;
   }
 
-  return `${apiProtocol}//${hostname}:8000`;
+  return '/api-proxy';
 }
 
 export const API_BASE_URL =
