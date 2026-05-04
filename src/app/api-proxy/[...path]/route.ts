@@ -1,4 +1,5 @@
-const apiProxyTarget = process.env.API_PROXY_TARGET?.replace(/\/+$/, "");
+const defaultApiProxyTarget = "https://hopeaidbackend.up.railway.app";
+const apiProxyTarget = (process.env.API_PROXY_TARGET || defaultApiProxyTarget).replace(/\/+$/, "");
 const forwardedHeaders = new Set([
   "accept",
   "authorization",
@@ -13,10 +14,6 @@ type RouteContext = {
 };
 
 function buildProxyUrl(pathSegments: string[], request: Request): URL {
-  if (!apiProxyTarget) {
-    throw new Error("API_PROXY_TARGET is not configured");
-  }
-
   const pathname = pathSegments.join("/");
   const targetUrl = new URL(`${apiProxyTarget}/${pathname}`);
   const incomingUrl = new URL(request.url);
